@@ -35,16 +35,40 @@ function Event() {
     getEvent();
   }, []);
 
+  useEffect(() => {
+    if (!event) return;
+    const { promoImg, name, shortDescription } = event;
+
+    const previewElement = document.getElementById("event-preview");
+    previewElement!.innerHTML = `
+      <img src="${promoImg}" alt="${name}" />
+      <h3>${name}</h3>
+      <p>${shortDescription}</p>
+    `;
+
+    const ogTitle = document.createElement("meta");
+    ogTitle.setAttribute("property", "og:title");
+    ogTitle.setAttribute("content", name);
+    document.head.appendChild(ogTitle);
+
+    const ogDescription = document.createElement("meta");
+    ogDescription.setAttribute("property", "og:description");
+    ogDescription.setAttribute("content", shortDescription);
+    document.head.appendChild(ogDescription);
+
+    const ogImage = document.createElement("meta");
+    ogImage.setAttribute("property", "og:image");
+    ogImage.setAttribute("content", promoImg);
+    document.head.appendChild(ogImage);
+  }, [event]);
+
   if (loading) return <div>Loading...</div>;
   if (!event) return <div>Event not found</div>;
+
   return (
-    <div>
+    <div id="event-preview">
       <Helmet>
         <title>{event.name}</title>
-        <meta property="og:title" content={event.name} />
-        <meta property="og:description" content={event.shortDescription} />
-        <meta property="og:image" content={event.promoImg} />
-        <meta property="og:url" content={window.location.href} />
       </Helmet>
       <button onClick={getEvent}>Get Event</button>
       <p>{JSON.stringify(event)}</p>
