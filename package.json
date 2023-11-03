@@ -6,6 +6,9 @@
   "reactSnap": {
     "source": "dist"
   },
+  "resolutions": {
+    "puppeteer": "^13"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
