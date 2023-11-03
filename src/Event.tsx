@@ -39,13 +39,6 @@ function Event() {
     if (!event) return;
     const { promoImg, name, shortDescription } = event;
 
-    const previewElement = document.getElementById("event-preview");
-    previewElement!.innerHTML = `
-      <img src="${promoImg}" alt="${name}" />
-      <h3>${name}</h3>
-      <p>${shortDescription}</p>
-    `;
-
     const ogTitle = document.createElement("meta");
     ogTitle.setAttribute("property", "og:title");
     ogTitle.setAttribute("content", name);
@@ -66,7 +59,7 @@ function Event() {
   if (!event) return <div>Event not found</div>;
 
   return (
-    <div id="event-preview">
+    <div>
       <Helmet>
         <title>{event.name}</title>
       </Helmet>
