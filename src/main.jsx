@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { AppRouter } from "./AppRouter";
 
-ReactDOM.createRoot(document.getElementById("root")).render(<AppRouter />);
 const rootElement = document.getElementById("root");
+ReactDOM.createRoot(rootElement).render(<AppRouter />);
 
 if (rootElement.hasChildNodes()) {
   ReactDOM.hydrateRoot(rootElement, <AppRouter />);
